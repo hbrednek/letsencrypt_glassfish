@@ -21,7 +21,7 @@ What I've done is broken the process of obtaining a Let's Encrypt certificate in
 1. Set (if necessary) the server admin password.
 1. Set up the https domain
 
-Additionally, the script can be invoked periodically (typically via '<cron>') to check to see if any domains need to be renewed and if so, renew them automatically.
+Additionally, the script can be invoked periodically (typically via 'cron') to check to see if any domains need to be renewed and if so, renew them automatically.
 
 I have used this script to create a new certificate for three domains in less than 5 minutes.  
 
