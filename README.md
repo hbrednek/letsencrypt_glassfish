@@ -8,9 +8,9 @@ There exists a significant amount of documentation on the web which addresses th
 What I've done is broken the process of obtaining a Let's Encrypt certificate into the following steps:
 
 1. Customize the script to the particular local installation
-  1. List of domains for which a certificate is to be created
-  1. Glassfish/Payara setup (where they're located in your filesystem)
-  1. Password for Glassfish/Payara
+   1. List of domains for which a certificate is to be created
+   1. Glassfish/Payara setup (where they're located in your filesystem)
+   1. Password for Glassfish/Payara
 1. Change Glassfish/Payara to listen on ports 80 and 443
 1. Generate the Let's Encrypt certification keys
 1. Insure that the keystore password matches that of the server
