@@ -67,9 +67,9 @@
 # variant of this work for you in Windows, please let me know!
 #
 # Note 1: that at the end of this script is a subroutine which can be
-# used for certification renewal, which has to be done every 90 days
+# used for certificate renewal, which has to be done every 90 days
 # (or less) - but that's only after you've managed to create and
-# install the initial certification.
+# install the initial certificate.
 #
 # Note 2: I have successfully used this script to create certificates
 # for multiple domains in less than five minutes.  Additionally, it
@@ -201,7 +201,7 @@ die "Script must be run in $config\n" unless confirm_config_directory();
 
 # ========
 # Step 2
-# Generate the Let's Encrypt certification keys in webroot mode. Make
+# Generate the Let's Encrypt certificate keys in webroot mode. Make
 # sure that the server is running and listening on port 80 before
 # running this.
 #
@@ -267,8 +267,8 @@ die "Script must be run in $config\n" unless confirm_config_directory();
 
 # Invoke certbot (which needs to already be installed) placing
 # authentication artifacts in the server's docroot directory in order
-# to generate a set of certification keys. Getting certbot is left as
-# an exercise for the reader, but I managed to get it with 'apt-get
+# to generate a set of certificate keys. Getting certbot is left as an
+# exercise for the reader, but I managed to get it with 'apt-get
 # install certbot'.
 #
 # This is to be executed when glassfish/payara is running
@@ -289,7 +289,7 @@ sub generate_webroot_letsencrypt_keys {
 }
 
 # Invoke certbot (which needs to already be installed) in standalone
-# mode in order to generate a set of certification keys.
+# mode in order to generate a set of certificate keys.
 #
 sub generate_standalone_letsencrypt_keys {
     die "Server is running on port 80\n" if server_is_running( 80 );
@@ -512,7 +512,7 @@ sub domains_to_renew {
 
 # Decide if there are domains needing renewal and if so, renew them.
 #
-# Note well: Certification renewal should be done only if all the
+# Note well: Certificate renewal should be done only if all the
 # subroutines used to create the certificate in the first place are
 # commented out!
 #
