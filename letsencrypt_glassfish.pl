@@ -512,11 +512,6 @@ sub domains_to_renew {
 
 # Decide if there are domains needing renewal and if so, renew them.
 #
-# Note that in some cases (such as top level redirection) some
-# applications may need to be disabled and subsequently enabled for
-# this command to work.  That was necessary in my particular
-# installation, but it may not be necessary in yours.
-#
 # Note well: Certification renewal should be done only if all the
 # subroutines used to create the certificate in the first place are
 # commented out!
@@ -614,7 +609,7 @@ sub post_cert_access {
 # the necessary time for renewal window.
 #
 check_and_renew() if defined $ARGV[0] && $ARGV[0] eq 'renew';
-#
+
 # Check to see if the command has as its first argument the string
 # 'force-renew'.  If it does, force renewal of all domains.
 #
