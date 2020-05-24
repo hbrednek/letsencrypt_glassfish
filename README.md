@@ -25,4 +25,4 @@ Additionally, the script can be invoked periodically (typically via 'cron') to c
 
 I have used this script to create a new certificate for three domains in less than 5 minutes.  I have used this script to automatically renew three domains via a cron job.
 
-Good luck! Let me know if you have any problems.  mre@m79.net
+Good luck! Let me know if you have any problems. Mike Elliott - mre@m79.net
