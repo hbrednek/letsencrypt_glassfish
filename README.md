@@ -5,7 +5,7 @@ This script is intended to simplify the installation of a Let's Encrypt certific
 
 There exists a significant amount of documentation on the web which addresses this problem but I have found much of it to be ambiguous and incomplete.  This is an attempt to remove that ambiguity and incompleteness by giving a real world working example which can be modified to suit a particular situation.
 
-What I've done is broken the process of obtaining a Let's Encrypt certificate into the following steps, not all of which will be necessary:
+What I've done is broken the process of obtaining a Let's Encrypt certificate into the following steps, a few of which may not actually be necessary in a particular setting.  Skip any obviously unnecessary steps:
 
 1. Customize the script to the particular local installation
    1. List of domains for which a certificate is to be created
