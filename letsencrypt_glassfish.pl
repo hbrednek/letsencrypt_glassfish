@@ -226,11 +226,11 @@ die "Script must be run in $config\n" unless confirm_config_directory();
 
 # ========
 # Step 5
-# Import the created keystore into the glassfish/payara keystore
+# Import the created keystore into the Glassfish/Payara keystores
 #
 # *****
-## import_into_keystore_jks();
-## import_into_cacerts_jks();
+## import_PKCS_to_keystore($keystore_jks);
+## import_PKCS_to_keystore($cacerts_jks);
 
 # ========
 # Step 6
@@ -306,7 +306,9 @@ sub generate_standalone_letsencrypt_keys {
 # Configure a network listener to listen on a specific port
 #
 # Usage:
-#    listen_port( "http-listener-1", 80 ); 
+#
+#    listen_port( "http-listener-1", 80 );
+#
 # will cause http-listener-1 to listen on port 80.
 #
 sub listen_port {
@@ -345,32 +347,26 @@ sub create_pkcs12_file() {
         );
 }
 
-sub import_into_keystore_jks() {
-    print "-- Importing the created keystore into $keystore_jks\n\n";
+# Import the created keystore ($pkcs12_file) into one of the
+# existing server keystores.
+#
+sub import_PKCS_to_keystore() {
+    my $keystore = shift;
+    print "-- Importing the created keystore ($pkcs12_file)" .
+	" into $keystore\n\n";
     print_execute( 
         "keytool -importkeystore" 
         . " -srckeystore $pkcs12_file"
         . " -srcstorepass $password"
         . " -srcstoretype PKCS12"
-        . " -destkeystore $keystore_jks"
+        . " -destkeystore $keystore"
         . " -deststorepass $password"
         . " -alias $certificateNickName"
         );
 }
 
-sub import_into_cacerts_jks() {
-    print "-- Importing $pkcs12_file into $cacerts_jks\n\n";
-    print_execute(
-        "keytool -importkeystore" 
-        . " -srckeystore $pkcs12_file"
-        . " -srcstorepass $password"
-        . " -srcstoretype PKCS12"
-        . " -destkeystore $cacerts_jks"
-        . " -deststorepass $password"
-        . " -alias $certificateNickName"
-        );
-}
-
+# Set the admin password for the server.
+#
 sub set_admin_password() {
     print "-- ";
     print "Setting admin password. Default is the empty password";
@@ -380,6 +376,8 @@ sub set_admin_password() {
         );
 }
 
+# Update the server's SSL configuration.
+#
 sub update_SSL() {
     my $asadmin_prefix =
         "$asadmin set configs"
@@ -401,6 +399,8 @@ sub update_SSL() {
         );
 }
 
+# Apply certificate to $https_listener.
+#
 sub apply_certificate {
     print "-- Apply certificate to listener $https_listener\n\n";
     print_execute(
@@ -414,6 +414,9 @@ sub apply_certificate {
         );
 }
 
+# Provide user instructions as to how (through the administration
+# console page) the user can set the https domain.
+#
 sub set_https_domain {
     print "-- ";
     print "Using the admin console, access Configurations"
