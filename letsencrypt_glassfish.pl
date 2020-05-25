@@ -4,7 +4,7 @@
 # 
 # Copyright 2019 - 2020
 #
-# Michael R. Elliott Software Engineering and Compuer Forensics
+# Michael R. Elliott Software Engineering and Computer Forensics
 #
 # Licensed under the Creative Commons License.
 #
