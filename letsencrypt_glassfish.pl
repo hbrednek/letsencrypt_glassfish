@@ -83,8 +83,7 @@
 # execute only, or to show and execute.  Initial value is to only show
 # the commands without executing them.
 #
-my $true = 1;
-my $false = 0;
+my ($true, $false) = (1, 0);
 my $print_cmd = $true;
 my $execute_cmd = $false; # Change this to actually do something!
 
@@ -230,8 +229,8 @@ die "Script must be run in $config\n" unless confirm_config_directory();
 # Import the created keystore into the Glassfish/Payara keystores
 #
 # *****
-## import_PKCS_to_keystore($keystore_jks);
-## import_PKCS_to_keystore($cacerts_jks);
+## import_PKCS_to_keystore( $keystore_jks );
+## import_PKCS_to_keystore( $cacerts_jks );
 
 # ========
 # Step 6
