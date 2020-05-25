@@ -8,14 +8,14 @@
 #
 # Licensed under the Creative Commons License.
 #
-# This document may be copied, distributed, edited, remixed and built
-# upon by anyone, including commercial users.
+# This document may be copied, distributed, edited, remixed and
+# built upon by anyone, including commercial users.
 #
 ###################################################################
 # 
 # This script is intended to simplify the installation of a Let's
-# Encrypt certificate in a glassfish/payara server and provide an
-# automated way of renewing that certificate when it is about to
+# Encrypt certificate in a Glassfish/Payara server and provide an
+# automated way of renewing all Let's Encrypt certificates about to
 # expire.
 #
 # There exists a significant amount of documentation on the web which
