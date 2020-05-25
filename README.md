@@ -1,5 +1,5 @@
 # letsencrypt_glassfish
-A script to simplify the installation and maintenance of Let's Eencrypt certificates in Glassfish and Payara web servers.
+A script to simplify the installation and maintenance of Let's Encrypt certificates in Glassfish and Payara web servers.
 
 This script is intended to simplify the installation of a Let's Encrypt certificate in a glassfish/payara server and provide an automated way of renewing that certificate when it is about to expire.
 
