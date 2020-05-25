@@ -262,8 +262,8 @@ die "Script must be run in $config\n" unless confirm_config_directory();
 # Subroutines.
 #
 # You shouldn't have to modify any of the following subroutines as
-# written.  If you feel the need to modify any others, please let me
-# know.
+# written.  If you feel the need to modify any of these routines,
+# please let me know as others may have encountered the same situation.
 
 # Invoke certbot (which needs to already be installed) placing
 # authentication artifacts in the server's docroot directory in order
