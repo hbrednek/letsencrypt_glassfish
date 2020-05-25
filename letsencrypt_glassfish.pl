@@ -36,7 +36,7 @@
 # unnecessary step, please let me know!
 #
 # Examine all the values up to the Actions section, modifying them as
-# fits your particular implementation.  In particular, change the value
+# fits your individual implementation.  In particular, change the value
 # of $execute_command to $true to actually do something other than show
 # what would be done if you allowed it.
 #
@@ -54,8 +54,9 @@
 # 2) I switched to payara half way through the script's development.
 #    However payara has (had?) a problem with VNC's which prevented it
 #    from running.  I had to initially start my host (a Raspberry Pi)
-#    without a VNC.  You may need to start payara from an SSH shell
-#    then disable hazelcast (the problematic payara service) via:
+#    without a VNC and then change the payara runtime environment.
+#    You may need to start payara from an SSH shell then disable
+#    hazelcast (the problematic payara service) via:
 #
 #    asadmin set-hazelcast-configuration --enabled=false
 #
@@ -74,7 +75,7 @@
 # Note 2: I have successfully used this script to create certificates
 # for multiple domains in less than five minutes.  Additionally, it
 # has been used to successfully renew those certificates from a cron
-# job with no manual intervention (at 4 AM!).
+# job with no manual intervention.
 # ----
 # Installation control
 #
@@ -104,7 +105,7 @@ my @domains = qw/
 /;
 
 # ----
-# Glassfish/Payara stuff
+# Glassfish/Payara and certbot stuff
 #
 # These need to be set to reflect your particular installation
 #
