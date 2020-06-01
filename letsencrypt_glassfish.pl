@@ -76,6 +76,13 @@
 # for multiple domains in less than five minutes.  Additionally, it
 # has been used to successfully renew those certificates from a cron
 # job with no manual intervention.
+#
+# Note 3: Sometimes additional tweaking may be needed.  I have found this
+# article (which existed as of June 2020) to be helpful:
+#
+#    https://blog.payara.fish/
+#       securing-payara-server-with-custom-ssl-certificate
+#   
 # ----
 # Installation control
 #
