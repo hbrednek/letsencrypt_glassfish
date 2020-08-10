@@ -389,7 +389,7 @@ sub update_SSL() {
     my $asadmin_prefix =
         "$asadmin set configs"
         . ".config.server-config.network-"
-        . "config.protocols.protocol.http-listener-2.";
+        . "config.protocols.protocol.$https_listener.";
 
     print "-- Update server SSL listener\n\n";
     print_execute(
