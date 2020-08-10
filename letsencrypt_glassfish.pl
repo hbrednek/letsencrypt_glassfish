@@ -337,7 +337,7 @@ sub change_keystore_password() {
     print "-- Changing keystore $keystore_jks password to $password\n\n";
     print "-- The expected password is $password\n"
         . "Change as necessary:\n\n";
-    print_execute( "keytool -storepassword -keystore $keystore_jks" );
+    print_execute( "keytool -storepasswd -keystore $keystore_jks" );
 }
 
 # Create PKCS.p12 file with key and certificate
