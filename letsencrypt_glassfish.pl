@@ -625,8 +625,8 @@ sub post_cert_access {
 #
 sub reinstall_certificate {
     create_pkcs12_file();
-    import_into_keystore_jks();
-    import_into_cacerts_jks();
+    import_PKCS_to_keystore( $keystore_jks );
+    import_PKCS_to_keystore( $cacerts_jks );
     apply_certificate();
     update_SSL();
     print_execute( "$asadmin restart-domain $domain_name" );
