@@ -2,7 +2,7 @@
 
 ###################################################################
 # 
-# Copyright 2019 - 2020
+# Copyright 2019 - 2021
 #
 # Michael R. Elliott Software Engineering and Computer Forensics
 #
@@ -77,11 +77,12 @@
 # has been used to successfully renew those certificates from a cron
 # job with no manual intervention.
 #
-# Note 3: Sometimes additional tweaking may be needed.  I have found this
-# article (which existed as of June 2020) to be helpful:
+# Sample crontab entries:
 #
-#    https://blog.payara.fish/
-#       securing-payara-server-with-custom-ssl-certificate
+#     CONFIG=/opt/payara5/glassfish/domains/domain1/config
+#     LELOG=/tmp/letsencrypt.log
+#     12 4 * * * root \
+#        (cd $CONFIG && /root/letsencrypt_glassfish.pl renew >> $LELOG)
 #   
 # ----
 # Installation control
@@ -98,16 +99,15 @@ my $execute_cmd = $false; # Change this to actually do something!
 # Target domain stuff.  
 #
 # The list of domains which are to be made usable through TLS.  Add
-# all your domains here. These were mine, but after multiple
-# colleagues whose advice I respect told me not to, I changed them to
-# bogus domans for illustrative purposes only.  It's OK if this list
-# contains only one domain, but it must contain at least one domain.
-# Otherwise, there's nothing for which a cert can be generated.
+# all your domains here. These were mine as of January 2020. It's OK
+# if this list contains only one domain, but it must contain at least
+# one domain.  Otherwise, there's nothing for which a cert can be
+# generated.
 #
 my @domains = qw/
-   domainx.net
-   oc-stuff.com 
-   alphaforensic.com
+   m79.net
+   oc-water.com
+   unixforensic.com
 /;
 
 # ----
@@ -129,7 +129,6 @@ my $http_listener = "http-listener-1";
 my $https_listener = "http-listener-2";
 my $domain_path = "$glassfish_base/domains/$domain_name";
 my $config = "$domain_path/config";
-my $docroot = "$domain_path/docroot";
 
 # This is the password of both the server and the keystore.  The
 # default is 'changeit'.  The two need to have the same password.
@@ -161,7 +160,7 @@ my $certificate_private_key = "$letsencrypt_base/privkey.pem";
 # These values are arbitrary, but known to work.
 #
 my $pkcs12_file = "pkcs.p12";
-my $certificateNickName = "${domain_name}cert";
+my $certificateNickName = $domain_name . "cert";
 
 # ------------------------------------------------------------------------
 # Validiations
@@ -283,8 +282,11 @@ die "Script must be run in $config\n" unless confirm_config_directory();
 sub generate_webroot_letsencrypt_keys {
     die "Server is not running on port 80\n"
         unless server_is_running( 80 );
+
+    my $docroot = "$domain_path/docroot";
     die "Can't find docroot at $docroot\n"
         unless -d $docroot;
+
     pre_cert_access();
     print_execute(
         "$certbot certonly"
@@ -351,6 +353,8 @@ sub create_pkcs12_file() {
         . " -inkey $certificate_private_key" 
         . " -out $pkcs12_file" 
         . " -name $certificateNickName"
+	. " -passin pass:$password"
+	. " -passout pass:$password"
         );
 }
 
@@ -549,6 +553,7 @@ sub check_and_renew {
 	pre_cert_access();
         system "$certbot renew";
 	post_cert_access();
+	reinstall_certificate();
     }
     else {
         print "[letsencrypt_glassfish] No domains need renewal\n";
@@ -574,6 +579,7 @@ sub force_renew {
     pre_cert_access();
     print_execute( "$certbot renew --force-renewal" );
     post_cert_access();
+    reinstall_certificate();
     print "[letsencrypt_glassfish] certbot force renewal completed\n";
 }
 
@@ -612,6 +618,18 @@ sub post_cert_access {
     foreach (list_all_applications()) {
 	print_execute( "$asadmin enable $_" );
     }
+}
+
+# Gather together all the steps needed to reinstall the certificate into
+# a separate subroutine.  Execute this when updating a certificate.
+#
+sub reinstall_certificate {
+    create_pkcs12_file();
+    import_into_keystore_jks();
+    import_into_cacerts_jks();
+    apply_certificate();
+    update_SSL();
+    print_execute( "$asadmin restart-domain $domain_name" );
 }
 
 # Check to see if the command has as its first argument the string
