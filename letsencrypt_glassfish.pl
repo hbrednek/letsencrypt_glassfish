@@ -339,7 +339,7 @@ sub change_keystore_password() {
     print "-- Changing keystore $keystore_jks password to $password\n\n";
     print "-- The expected password is $password\n"
         . "Change as necessary:\n\n";
-    print_execute( "keytool -storepassword -keystore $keystore_jks" );
+    print_execute( "keytool -storepasswd -keystore $keystore_jks" );
 }
 
 # Create PKCS.p12 file with key and certificate
@@ -643,3 +643,5 @@ check_and_renew() if defined $ARGV[0] && $ARGV[0] eq 'renew';
 # 'force-renew'.  If it does, force renewal of all domains.
 #
 force_renew() if defined $ARGV[0] && $ARGV[0] eq 'force-renew';
+
+#  LocalWords:  usr
