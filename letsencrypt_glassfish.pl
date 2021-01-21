@@ -361,12 +361,13 @@ sub create_pkcs12_file() {
 # Import the created keystore ($pkcs12_file) into one of the
 # existing server keystores.
 #
-sub import_PKCS_to_keystore() {
+sub import_PKCS_to_keystore( $ ) {
     my $keystore = shift;
     print "-- Importing the created keystore ($pkcs12_file)" .
 	" into $keystore\n\n";
     print_execute( 
-        "keytool -importkeystore" 
+        "keytool -importkeystore"
+	. " -noprompt"
         . " -srckeystore $pkcs12_file"
         . " -srcstorepass $password"
         . " -srcstoretype PKCS12"
