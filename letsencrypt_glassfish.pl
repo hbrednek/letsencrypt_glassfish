@@ -316,9 +316,9 @@ sub generate_standalone_letsencrypt_keys {
 #
 # Usage:
 #
-#    listen_port( "http-listener-1", 80 );
+#    listen_port( "$http-listener", 80 );
 #
-# will cause http-listener-1 to listen on port 80.
+# will cause $http-listener to listen on port 80.
 #
 sub listen_port {
     my $network_listener = shift;
@@ -339,7 +339,7 @@ sub change_keystore_password() {
     print "-- Changing keystore $keystore_jks password to $password\n\n";
     print "-- The expected password is $password\n"
         . "Change as necessary:\n\n";
-    print_execute( "keytool -storepasswd -keystore $keystore_jks" );
+    print_execute( "keytool -storepassword -keystore $keystore_jks" );
 }
 
 # Create PKCS.p12 file with key and certificate
