@@ -643,5 +643,3 @@ check_and_renew() if defined $ARGV[0] && $ARGV[0] eq 'renew';
 # 'force-renew'.  If it does, force renewal of all domains.
 #
 force_renew() if defined $ARGV[0] && $ARGV[0] eq 'force-renew';
-
-#  LocalWords:  usr
