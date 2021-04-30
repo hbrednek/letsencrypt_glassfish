@@ -40,6 +40,18 @@
 # of $execute_command to $true to actually do something other than show
 # what would be done if you allowed it.
 #
+# Note well:
+# As delivered, the script DOES ABSOLUTELY NOTHING!  This is intentional
+# as initially, all actions have been commented out!  The recommended
+# technique is to uncomment each step, observe what it will do, then
+# actually do that.  For example, Step 1 sets the incoming ports to 80
+# and 443.  That will almost certainly be done at most one time, while
+# generating certificates - especially if new domains are added, may be
+# done multiple times - and checking for certificate renewal may well be
+# done daily or weekly.  So, un-comment the actions which you need to
+# execute and re-comment those which will not be needed in the near
+# future.
+#
 # Two important problems were encountered in the creation of this
 # script:
 #
